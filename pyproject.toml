@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "aoc2024"
+description = ""
+authors = ["gield"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.13"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.8.1"
+mypy = "^1.13.0"
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+ignore = [
+    "E741",  # allow using I, l, O as variable names
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
