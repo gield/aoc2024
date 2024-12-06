@@ -21,6 +21,11 @@ ignore = [
     "E741",  # allow using I, l, O as variable names
 ]
 
+[tool.mypy]
+python_version = "3.13"
+disallow_untyped_defs = true
+warn_unreachable = true
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
