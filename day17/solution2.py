@@ -1,5 +1,3 @@
-import itertools
-
 with open("input.txt", "r") as f:
     lines = f.read().strip().split("\n")
 
@@ -23,26 +21,16 @@ def run(a: int) -> list[int]:
     return output
 
 
-for a in itertools.count(78_732_909, 2_097_152):
-    if a & 2**47 != 2**47:  # 100000000000000000000000000000000000000000000000
-        continue
-    if a & 2**40 != 2**40:  # 10000000000000000000000000000000000000000
-        continue
-    if a & 2**37 != 2**37:  # 10000000000000000000000000000000000000
-        continue
-    if a & 2**32 != 2**32:  # 100000000000000000000000000000000
-        continue
-    if a & 2**26 != 2**26:  # 100000000000000000000000000
-        continue
-    if a & 2**20 != 2**20:  # 100000000000000000000
-        continue
-    if a & 24173 != 24173:  # 101111001101101
-        continue
-    if a & 2**15 != 0:  # 1000000000000000
-        continue
-    if a & 2**8 != 0:  # 100000000
-        continue
+def dfs(a: int, i: int) -> bool:
+    # Build a, starting from the end of the program, per 3 bits
+    for j in range(8):
+        if run(a * 8 + j) == program[i:]:
+            if i == 0:
+                print(a * 8 + j)
+                return True
+            if n := dfs(a * 8 + j, i - 1):
+                return n
+    return False
 
-    if run(a) == program:
-        print(a)
-        break
+
+dfs(0, len(program) - 1)
